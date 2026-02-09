@@ -1,85 +1,48 @@
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 
 function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <nav className="sticky top-0 z-50 bg-[#111827]/80 backdrop-blur-md border-b border-gray-700 px-8 py-4 flex justify-between items-center">
+    <nav className="bg-[#111827] border-b border-gray-700 px-6 md:px-12 py-4">
+      <div className="flex justify-between items-center">
+        
+        {/* Logo */}
+        <h1 className="text-xl font-bold text-purple-400">
+          Reshika N
+        </h1>
 
-      {/* Logo */}
-      <h1 className="text-xl font-bold tracking-wide text-purple-400">
-        Reshika N
-      </h1>
+        {/* Desktop Menu */}
+        <div className="hidden md:flex space-x-8 text-sm font-medium">
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/projects">Projects</Link>
+          <Link to="/experience">Experience</Link>
+          <Link to="/certifications">Certifications</Link>
+          <Link to="/contact">Contact</Link>
+        </div>
 
-      {/* Navigation Links */}
-      <div className="hidden md:flex space-x-6 text-sm font-medium">
-
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive
-              ? "text-purple-400"
-              : "hover:text-purple-400 transition duration-300"
-          }
-        >
-          Home
-        </NavLink>
-
-        <NavLink
-          to="/about"
-          className={({ isActive }) =>
-            isActive
-              ? "text-purple-400"
-              : "hover:text-purple-400 transition duration-300"
-          }
-        >
-          About
-        </NavLink>
-
-        <NavLink
-          to="/projects"
-          className={({ isActive }) =>
-            isActive
-              ? "text-purple-400"
-              : "hover:text-purple-400 transition duration-300"
-          }
-        >
-          Projects
-        </NavLink>
-
-        <NavLink
-          to="/experience"
-          className={({ isActive }) =>
-            isActive
-              ? "text-purple-400"
-              : "hover:text-purple-400 transition duration-300"
-          }
-        >
-          Experience
-        </NavLink>
-
-        <NavLink
-          to="/certifications"
-          className={({ isActive }) =>
-            isActive
-              ? "text-purple-400"
-              : "hover:text-purple-400 transition duration-300"
-          }
-        >
-          Certifications
-        </NavLink>
-
-        <NavLink
-          to="/contact"
-          className={({ isActive }) =>
-            isActive
-              ? "text-purple-400"
-              : "hover:text-purple-400 transition duration-300"
-          }
-        >
-          Contact
-        </NavLink>
-
+        {/* Mobile Button */}
+        <div className="md:hidden">
+          <button onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden mt-4 flex flex-col space-y-4 text-sm font-medium">
+          <Link to="/" onClick={() => setIsOpen(false)}>Home</Link>
+          <Link to="/about" onClick={() => setIsOpen(false)}>About</Link>
+          <Link to="/projects" onClick={() => setIsOpen(false)}>Projects</Link>
+          <Link to="/experience" onClick={() => setIsOpen(false)}>Experience</Link>
+          <Link to="/certifications" onClick={() => setIsOpen(false)}>Certifications</Link>
+          <Link to="/contact" onClick={() => setIsOpen(false)}>Contact</Link>
+        </div>
+      )}
     </nav>
   );
 }
